@@ -59,4 +59,12 @@ body {
   .print-hidden {
     display: none !important;
   }
+
+  /* Dark-themed output cards flip to paper when printed. */
+  .print-reset,
+  .print-reset * {
+    background: transparent !important;
+    color: #111111 !important;
+    border-color: #cccccc !important;
+  }
 }

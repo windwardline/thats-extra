@@ -47,7 +47,7 @@ export function SampleOutput({
   source: GenerateResponse["source"];
 }) {
   return (
-    <div className="rounded-lg border border-line bg-surface">
+    <div className="print-reset rounded-lg border border-line bg-surface">
       <div className="flex flex-wrap items-start justify-between gap-3 border-b border-line p-6">
         <div>
           <p className="font-utility text-xs uppercase tracking-[0.2em] text-fog">
