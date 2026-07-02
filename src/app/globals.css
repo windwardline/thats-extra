@@ -1,26 +1,62 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  --color-ink: #0b0e13;
+  --color-surface: #11151c;
+  --color-raised: #161b24;
+  --color-line: #232a35;
+  --color-amber: #f5a524;
+  --color-amber-deep: #c47f0e;
+  --color-paper: #f7f5f0;
+  --color-fog: #9aa5b4;
+  --color-bright: #e8ecf2;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-display: var(--font-sora);
+  --font-body: var(--font-inter);
+  --font-utility: var(--font-jetbrains);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-ink);
+  color: var(--color-bright);
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+::selection {
+  background: var(--color-amber);
+  color: var(--color-ink);
+}
+
+/* Scroll reveal — CSS owns the motion, Reveal only toggles the class. */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Print: documents render as plain paper; site chrome disappears. */
+@media print {
+  body {
+    background: #ffffff;
+    color: #111111;
+  }
+
+  .print-hidden {
+    display: none !important;
+  }
 }
