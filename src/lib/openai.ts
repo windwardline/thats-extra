@@ -22,9 +22,12 @@ Rules:
 - Do not invent dollar amounts unless they appear in the report.`;
 
 /**
- * Calls OpenAI to draft the change request package. Throws when no
- * OPENAI_API_KEY is configured or on any API/validation failure — the
- * caller (generate-handler) owns the fallback decision.
+ * Calls an OpenAI-compatible API to draft the change request package.
+ * Defaults to OpenAI itself; set OPENAI_BASE_URL + OPENAI_MODEL to use a
+ * compatible provider (e.g. Groq: https://api.groq.com/openai/v1 with
+ * model openai/gpt-oss-120b). Throws when no OPENAI_API_KEY is configured
+ * or on any API/validation failure — the caller (generate-handler) owns
+ * the fallback decision.
  */
 export async function generateWithOpenAI(report: FieldReport): Promise<ChangeRequestPackage> {
   const apiKey = process.env.OPENAI_API_KEY;
@@ -33,9 +36,14 @@ export async function generateWithOpenAI(report: FieldReport): Promise<ChangeReq
   // maxRetries: 0 — the caller falls back to the deterministic generator on
   // failure; SDK retries would stack 15s timeouts and can outlive a
   // serverless function's duration limit before the fallback ever runs.
-  const client = new OpenAI({ apiKey, timeout: 15_000, maxRetries: 0 });
+  const client = new OpenAI({
+    apiKey,
+    baseURL: process.env.OPENAI_BASE_URL || undefined,
+    timeout: 15_000,
+    maxRetries: 0,
+  });
   const completion = await client.chat.completions.create({
-    model: "gpt-4o-mini",
+    model: process.env.OPENAI_MODEL || "gpt-4o-mini",
     response_format: { type: "json_object" },
     messages: [
       { role: "system", content: SYSTEM_PROMPT },
