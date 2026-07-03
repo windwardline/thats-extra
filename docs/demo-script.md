@@ -36,7 +36,7 @@
 
 ### [1:30 — Tab 2, scroll as you talk] — The Automation (45 sec)
 
-> Under the hood it's one Zapier workflow, six steps, and I can walk it end to end in thirty seconds. A form submission from the field **triggers** the Zap. A **formatter** cleans the inputs. **OpenAI-compatible AI** drafts the full change request package. It merges into a **branded Google Doc and PDF**, **emails the project manager**, and **stores the record** — so at the end of the quarter, Meridian can see every extra across every job. The amber chips you see are where the client's credentials plug in on day one.
+> Under the hood it's one Zapier workflow, six steps, and I can walk it end to end in thirty seconds. A form submission from the field **triggers** the Zap. A **formatter** cleans the inputs. **OpenAI-compatible AI** drafts the full change request package. It merges into a **branded Google Doc and PDF**, **emails the project manager**, and **stores the record** — so at the end of the quarter, Meridian can see every extra across every job. The amber chips you see are where the client's credentials plug in on day one — and this isn't a diagram of a hypothetical: the Zap you're looking at is live, and you'll see it fire in a minute.
 
 ### [2:15 — Tab 3] — The Live Demo (75 sec — this is the money shot)
 
@@ -45,6 +45,8 @@
 > *(Click **Generate Change Request**. It lands in ~3 seconds.)*
 >
 > Three seconds. *(Scroll the output slowly.)* Executive summary. Existing condition. Requested change. Labor, material, and schedule impacts. A formal customer-facing change request ready to forward to the GC. And a **ready-to-send email to the project manager** — signed by the foreman who filed it. See the badge? **Live AI** — that was generated just now, from those exact inputs. The foreman files a two-minute report, and this document exists before he's back on the lift.
+>
+> *(Switch to the PM inbox tab — the email should already be there.)* And while we were reading, the automation finished the rest of the job: the project manager just received this email — from the company's own domain — with the branded change request attached, and the log picked up a new row. Nobody touched anything after the foreman hit submit.
 
 **⚠️ If Wi-Fi dies:** the badge will say *Sample Mode* instead. Say this, with confidence:
 > "Notice the badge says Sample Mode — the AI call couldn't get through the room's Wi-Fi, so the system fell back to its built-in generator and *told us the truth about it*. A field tool that dies on a jobsite with bad signal is a field tool nobody uses. This one degrades gracefully. That's a feature I designed in."

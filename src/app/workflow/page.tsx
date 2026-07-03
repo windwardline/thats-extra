@@ -175,10 +175,12 @@ export default function WorkflowPage() {
               ))}
             </ul>
             <p className="mt-10 max-w-2xl rounded-lg border border-line bg-surface p-5 text-sm leading-relaxed text-fog">
-              <span className="font-semibold text-bright">Note for the demo:</span> this
-              app&apos;s own <code className="font-utility text-amber">/api/generate</code> route
-              mirrors step 3 exactly — same inputs, same ten-section package — so the demo on
-              this site runs without a Zapier account connected.
+              <span className="font-semibold text-bright">Note for the demo:</span> the{" "}
+              <code className="font-utility text-amber">/demo</code> form on this site is wired
+              to a live version of this exact Zap — submitting it really does create the doc,
+              email the PM, and append the log row. The app&apos;s own{" "}
+              <code className="font-utility text-amber">/api/generate</code> route still mirrors
+              step 3, so the on-screen result renders even if the automation is offline.
             </p>
           </Reveal>
         </Container>
