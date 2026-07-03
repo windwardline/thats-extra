@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ClipboardList } from "lucide-react";
 import { PrintButton } from "@/components/print-button";
+import { buttonGhost, buttonPrimary } from "@/components/ui";
 import {
   CHANGE_TYPES,
   TRADES,
@@ -128,7 +129,7 @@ export function DemoForm({ initialSample }: { initialSample: boolean }) {
           <button
             type="button"
             onClick={loadSample}
-            className="inline-flex items-center gap-2 rounded-md border border-line px-3 py-1.5 text-sm text-fog transition-colors hover:border-fog hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber"
+            className={`${buttonGhost} px-3 py-1.5 text-sm`}
           >
             <ClipboardList className="size-4" aria-hidden />
             Load sample scenario
@@ -254,7 +255,7 @@ export function DemoForm({ initialSample }: { initialSample: boolean }) {
         <button
           type="submit"
           disabled={loading}
-          className="mt-8 inline-flex items-center justify-center rounded-md bg-amber px-6 py-3 text-sm font-semibold text-ink shadow-[0_0_24px_rgba(245,165,36,0.25)] transition-colors hover:bg-amber-deep disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber"
+          className={`${buttonPrimary} mt-8 px-6 py-3 text-sm font-semibold disabled:opacity-60`}
         >
           {loading ? "Drafting your change request…" : "Generate Change Request"}
         </button>
