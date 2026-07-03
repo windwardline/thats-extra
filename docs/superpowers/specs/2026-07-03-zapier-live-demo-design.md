@@ -102,6 +102,21 @@ runs of the same system. Noted here so it isn't a surprise mid-demo.
   that the live demo is wired to a real Zap.
 - `docs/demo-script.md`: add the beat — submit the form, then switch to the PM inbox.
 
+## Implementation deviations (agreed during build, 2026-07-03)
+
+- **AI step is Groq, not the Zapier OpenAI app.** Michael chose Groq (free) mid-build;
+  step 3 is a Webhooks "Custom Request" POST to api.groq.com (openai/gpt-oss-120b),
+  and the webhook payload gained an embed-safe `reportJson` field to keep the request
+  body valid regardless of quotes/newlines in report fields.
+- **A Parse JSON formatter step was added** (the Groq reply's package JSON arrives as
+  one string), so the live Zap has seven steps.
+- **Google Doc is created from text, not a template** — no manual template setup;
+  branded structure comes from the step's HTML content.
+- **Email goes out via Resend with no PDF attachment**: Resend fetches attachment URLs
+  anonymously and Google's authenticated PDF export URL 401s. The email carries the
+  full AI-drafted body; the doc link lives in the Sheets log.
+- `/workflow` copy updated to match (Groq, Resend, Google Sheets).
+
 ## Out of scope
 
 - Zapier Interfaces/Forms as an alternative trigger.
