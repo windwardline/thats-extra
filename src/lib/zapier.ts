@@ -14,11 +14,19 @@ export async function forwardToZapier(
   if (!url) return "skipped";
 
   const fetchFn = deps.fetchFn ?? fetch;
+  // reportJson is the serialized report, escaped so the Zap's Custom
+  // Request step can embed it verbatim inside a JSON string literal —
+  // Zapier inserts mapped fields without escaping, so quotes/newlines in
+  // raw fields would otherwise corrupt the Groq request body.
+  const payload = {
+    ...report,
+    reportJson: JSON.stringify(JSON.stringify(report)).slice(1, -1),
+  };
   try {
     const res = await fetchFn(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(report),
+      body: JSON.stringify(payload),
       signal: AbortSignal.timeout(3000),
     });
     if (!res.ok) {

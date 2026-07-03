@@ -22,8 +22,21 @@ describe("forwardToZapier", () => {
     expect(url).toBe(HOOK);
     expect(init.method).toBe("POST");
     expect(init.headers).toMatchObject({ "Content-Type": "application/json" });
-    expect(JSON.parse(init.body)).toEqual(MIDTOWN_SCENARIO);
+    expect(JSON.parse(init.body)).toEqual({
+      ...MIDTOWN_SCENARIO,
+      reportJson: JSON.stringify(JSON.stringify(MIDTOWN_SCENARIO)).slice(1, -1),
+    });
     expect(init.signal).toBeInstanceOf(AbortSignal);
+  });
+
+  it("escapes quotes and newlines in reportJson so it embeds inside a JSON string", async () => {
+    vi.stubEnv("ZAPIER_WEBHOOK_URL", HOOK);
+    const fetchFn = vi.fn().mockResolvedValue(new Response("ok", { status: 200 }));
+    const tricky = { ...MIDTOWN_SCENARIO, description: 'GC said "move it"\nby Friday.' };
+    await forwardToZapier(tricky, { fetchFn });
+    const { reportJson } = JSON.parse(fetchFn.mock.calls[0][1].body);
+    // Embedding the value verbatim between quotes must yield valid JSON.
+    expect(JSON.parse(JSON.parse(`"${reportJson}"`))).toEqual(tricky);
   });
 
   it("reports failed on a non-2xx response", async () => {
