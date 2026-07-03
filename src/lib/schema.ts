@@ -51,4 +51,5 @@ export type ZapierStatus = "sent" | "skipped" | "failed";
 export type GenerateResponse = {
   source: "openai" | "sample";
   pkg: ChangeRequestPackage;
+  zapier: ZapierStatus;
 };

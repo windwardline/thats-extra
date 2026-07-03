@@ -31,4 +31,31 @@ describe("handleGenerate", () => {
     expect(r.status).toBe(200);
     expect(r.json).toMatchObject({ source: "sample" });
   });
+
+  it("reports the zapier dispatch status on success responses", async () => {
+    vi.stubEnv("OPENAI_API_KEY", "");
+    const forward = vi.fn().mockResolvedValue("sent");
+    const r = await handleGenerate(MIDTOWN_SCENARIO, { forward });
+    expect(r.json).toMatchObject({ source: "sample", zapier: "sent" });
+    expect(forward).toHaveBeenCalledWith(
+      expect.objectContaining({ projectName: MIDTOWN_SCENARIO.projectName }),
+    );
+  });
+
+  it("forwards to zapier on the openai path too", async () => {
+    vi.stubEnv("OPENAI_API_KEY", "sk-test");
+    const fake = generateSamplePackage(MIDTOWN_SCENARIO);
+    const forward = vi.fn().mockResolvedValue("skipped");
+    const r = await handleGenerate(MIDTOWN_SCENARIO, {
+      generate: vi.fn().mockResolvedValue(fake),
+      forward,
+    });
+    expect(r.json).toMatchObject({ source: "openai", zapier: "skipped" });
+  });
+
+  it("does not forward to zapier on validation failure", async () => {
+    const forward = vi.fn();
+    await handleGenerate({ nope: true }, { forward });
+    expect(forward).not.toHaveBeenCalled();
+  });
 });
