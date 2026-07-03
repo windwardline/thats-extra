@@ -1,6 +1,7 @@
 import { fieldReportSchema, type GenerateResponse } from "@/lib/schema";
 import { generateSamplePackage } from "@/lib/generator";
 import { generateWithOpenAI } from "@/lib/openai";
+import { forwardToZapier } from "@/lib/zapier";
 
 export type GenerateResult = {
   status: number;
@@ -11,10 +12,12 @@ export type GenerateResult = {
  * Framework-free request handler for /api/generate. Validates the body,
  * tries OpenAI when a key is configured, and falls back to the
  * deterministic sample generator on any failure — the demo never 500s.
+ * Successful generations are also forwarded to the live Zapier automation
+ * (a no-op unless ZAPIER_WEBHOOK_URL is configured).
  */
 export async function handleGenerate(
   body: unknown,
-  deps: { generate?: typeof generateWithOpenAI } = {},
+  deps: { generate?: typeof generateWithOpenAI; forward?: typeof forwardToZapier } = {},
 ): Promise<GenerateResult> {
   const parsed = fieldReportSchema.safeParse(body);
   if (!parsed.success) {
@@ -28,15 +31,19 @@ export async function handleGenerate(
 
   const report = parsed.data;
   const generate = deps.generate ?? generateWithOpenAI;
+  const forward = deps.forward ?? forwardToZapier;
 
   if (process.env.OPENAI_API_KEY) {
     try {
       const pkg = await generate(report);
-      return { status: 200, json: { source: "openai", pkg } };
+      return { status: 200, json: { source: "openai", pkg, zapier: await forward(report) } };
     } catch (err) {
       console.warn("generate: falling back to sample:", err);
     }
   }
 
-  return { status: 200, json: { source: "sample", pkg: generateSamplePackage(report) } };
+  return {
+    status: 200,
+    json: { source: "sample", pkg: generateSamplePackage(report), zapier: await forward(report) },
+  };
 }

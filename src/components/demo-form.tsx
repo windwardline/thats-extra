@@ -285,7 +285,18 @@ export function DemoForm({ initialSample }: { initialSample: boolean }) {
 
       {result ? (
         <div ref={resultRef} className="scroll-mt-24">
-          <div className="print-hidden mb-4 flex justify-end">
+          <div className="print-hidden mb-4 flex items-center justify-between gap-3">
+            {result.zapier === "sent" ? (
+              <p className="text-sm text-fog">
+                Also dispatched to the live automation — check the PM&apos;s inbox.
+              </p>
+            ) : result.zapier === "failed" ? (
+              <p className="text-sm text-amber">
+                Automation dispatch failed — the package below is unaffected.
+              </p>
+            ) : (
+              <span />
+            )}
             <PrintButton />
           </div>
           <SampleOutput pkg={result.pkg} source={result.source} />

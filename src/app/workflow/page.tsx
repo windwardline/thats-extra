@@ -38,33 +38,34 @@ const ZAP_STEPS: ZapStep[] = [
     produces: "Clean, consistently-labeled fields.",
   },
   {
-    app: "OpenAI",
-    title: "OpenAI — Draft the change request",
-    what: "A structured prompt hands the cleaned report to the model (gpt-4o-mini, JSON output) and asks for the full ten-section change request package: title, summary, conditions, impacts, next step, customer-facing request, and PM email draft.",
+    app: "OpenAI-compatible AI (Groq)",
+    title: "AI — Draft the change request",
+    what: "A structured prompt hands the cleaned report to an OpenAI-compatible model (gpt-oss-120b on Groq, JSON output) and asks for the full ten-section change request package: title, summary, conditions, impacts, next step, customer-facing request, and PM email draft.",
     why: "This is the ninety seconds that used to be a PM's Thursday night. Field shorthand goes in; a document you'd proudly send comes out.",
     consumes: "Clean field report fields.",
     produces: "The ten-section change request package as structured JSON.",
-    credential: "OPENAI_API_KEY",
+    credential: "GROQ_API_KEY",
   },
   {
     app: "Google Docs",
     title: "Create Google Doc / PDF",
-    what: "Merges the package into a branded change request template and exports a PDF alongside the editable doc.",
-    why: "GCs sign PDFs, not text messages. The template keeps every change request looking like it came from the same professional company — because it did.",
+    what: "Renders the package into a branded change request document in Drive, with a PDF export alongside the editable doc.",
+    why: "GCs sign PDFs, not text messages. The document keeps every change request looking like it came from the same professional company — because it did.",
     consumes: "The change request package.",
     produces: "A branded Google Doc and PDF.",
     credential: "Google OAuth connection",
   },
   {
-    app: "Gmail / Outlook",
+    app: "Resend",
     title: "Email the Project Manager",
-    what: "Sends the drafted email — with the PDF attached — to the PM address from the field report. The PM reviews, adjusts if needed, and forwards to the GC.",
+    what: "Sends the drafted email from the company's own domain to the PM address on the field report. The PM reviews, adjusts if needed, and forwards to the GC.",
     why: "The PM stays in control of what the customer sees, but starts from a finished draft instead of a blank page and a text thread.",
-    consumes: "The email draft, the PDF, and the PM's address.",
+    consumes: "The email draft and the PM's address.",
     produces: "A change request in the PM's inbox, same day.",
+    credential: "RESEND_API_KEY",
   },
   {
-    app: "Supabase / Google Sheets / Airtable",
+    app: "Google Sheets",
     title: "Store the record",
     what: "Appends the full report and generated package to a running log — one row per extra, with project, trade, impacts, and status.",
     why: "One extra is an annoyance. Ninety extras across twenty jobs is a negotiation position. The log is where recovered revenue becomes visible.",
@@ -77,9 +78,9 @@ const ZAP_STEPS: ZapStep[] = [
 const DAY_ONE = [
   "A Zapier account (the whole Zap is six steps — Starter plan covers it)",
   "The field report form (Zapier Forms, Typeform, or this app's own /demo form)",
-  "An OpenAI API key for the drafting step",
-  "A Google account for the document template and PM email",
-  "A storage home for the log — Supabase, Google Sheets, or Airtable",
+  "An OpenAI-compatible API key for the drafting step (Groq's free tier works)",
+  "A Google account for the document and the running log",
+  "A Resend account (or any email provider) to send from the company's domain",
 ];
 
 export default function WorkflowPage() {
@@ -175,10 +176,12 @@ export default function WorkflowPage() {
               ))}
             </ul>
             <p className="mt-10 max-w-2xl rounded-lg border border-line bg-surface p-5 text-sm leading-relaxed text-fog">
-              <span className="font-semibold text-bright">Note for the demo:</span> this
-              app&apos;s own <code className="font-utility text-amber">/api/generate</code> route
-              mirrors step 3 exactly — same inputs, same ten-section package — so the demo on
-              this site runs without a Zapier account connected.
+              <span className="font-semibold text-bright">Note for the demo:</span> the{" "}
+              <code className="font-utility text-amber">/demo</code> form on this site is wired
+              to a live version of this exact Zap — submitting it really does create the doc,
+              email the PM, and append the log row. The app&apos;s own{" "}
+              <code className="font-utility text-amber">/api/generate</code> route still mirrors
+              step 3, so the on-screen result renders even if the automation is offline.
             </p>
           </Reveal>
         </Container>

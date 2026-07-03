@@ -46,7 +46,10 @@ export const changeRequestPackageSchema = z.object({
 
 export type ChangeRequestPackage = z.infer<typeof changeRequestPackageSchema>;
 
+export type ZapierStatus = "sent" | "skipped" | "failed";
+
 export type GenerateResponse = {
   source: "openai" | "sample";
   pkg: ChangeRequestPackage;
+  zapier: ZapierStatus;
 };
