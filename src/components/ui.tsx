@@ -11,6 +11,15 @@ export function Container({
   return <div className={`mx-auto w-full max-w-6xl px-6 ${className}`}>{children}</div>;
 }
 
+/**
+ * Single source of truth for button treatments — consumed by the Link-based
+ * Button below and by real <button> elements (form submit, print, etc.).
+ */
+export const buttonBase =
+  "inline-flex items-center justify-center gap-2 rounded-md transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber";
+export const buttonPrimary = `${buttonBase} bg-amber text-ink hover:bg-amber-deep shadow-[0_0_24px_rgba(245,165,36,0.25)]`;
+export const buttonGhost = `${buttonBase} border border-line text-fog hover:border-fog hover:text-white`;
+
 export function Button({
   href,
   variant = "primary",
@@ -20,14 +29,9 @@ export function Button({
   variant?: "primary" | "ghost";
   children: ReactNode;
 }) {
-  const base =
-    "inline-flex items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber";
-  const styles =
-    variant === "primary"
-      ? "bg-amber text-ink hover:bg-amber-deep shadow-[0_0_24px_rgba(245,165,36,0.25)]"
-      : "border border-line text-bright hover:border-fog hover:text-white";
+  const styles = variant === "primary" ? buttonPrimary : `${buttonGhost} text-bright`;
   return (
-    <Link href={href} className={`${base} ${styles}`}>
+    <Link href={href} className={`${styles} px-5 py-3 text-sm font-semibold`}>
       {children}
     </Link>
   );
