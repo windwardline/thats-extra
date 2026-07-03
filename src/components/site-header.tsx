@@ -1,13 +1,6 @@
 import Link from "next/link";
 import { Container } from "@/components/ui";
-
-const NAV = [
-  { href: "/", label: "Product" },
-  { href: "/demo", label: "Demo" },
-  { href: "/workflow", label: "How It Works" },
-  { href: "/proposal", label: "Proposal" },
-  { href: "/contract", label: "Contract" },
-] as const;
+import { NAV } from "@/lib/nav";
 
 export function SiteHeader() {
   return (

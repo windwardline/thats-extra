@@ -19,9 +19,10 @@ export async function handleGenerate(
   const parsed = fieldReportSchema.safeParse(body);
   if (!parsed.success) {
     const first = parsed.error.issues[0];
+    const field = first.path.join(".") || "request body";
     return {
       status: 400,
-      json: { error: `Invalid field report: ${first.path.join(".")} — ${first.message}` },
+      json: { error: `Invalid field report: ${field} — ${first.message}` },
     };
   }
 

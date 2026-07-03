@@ -5,9 +5,14 @@ import {
   type FieldReport,
 } from "@/lib/schema";
 
+// Derived from the schema so the prompt can never drift out of sync with
+// the validator (a stale key list would silently force every live request
+// into the sample fallback).
+const PACKAGE_KEYS = Object.keys(changeRequestPackageSchema.shape).join(", ");
+
 const SYSTEM_PROMPT = `You are a professional construction change-request writer working on behalf of a specialty-trade subcontractor. Given a field report, draft a complete, professional change request package a real subcontractor would send to a general contractor.
 
-Return a JSON object with exactly these string keys: title, executiveSummary, existingCondition, requestedChange, laborImpact, materialImpact, scheduleImpact, recommendedNextStep, customerFacingRequest, emailDraft.
+Return a JSON object with exactly these string keys: ${PACKAGE_KEYS}.
 
 Rules:
 - Formal, confident, factual tone. No hedging, no apologies.
@@ -25,7 +30,10 @@ export async function generateWithOpenAI(report: FieldReport): Promise<ChangeReq
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) throw new Error("OPENAI_API_KEY is not set");
 
-  const client = new OpenAI({ apiKey, timeout: 15_000 });
+  // maxRetries: 0 — the caller falls back to the deterministic generator on
+  // failure; SDK retries would stack 15s timeouts and can outlive a
+  // serverless function's duration limit before the fallback ever runs.
+  const client = new OpenAI({ apiKey, timeout: 15_000, maxRetries: 0 });
   const completion = await client.chat.completions.create({
     model: "gpt-4o-mini",
     response_format: { type: "json_object" },

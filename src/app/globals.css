@@ -20,6 +20,9 @@ body {
   background: var(--color-ink);
   color: var(--color-bright);
   font-family: var(--font-body), system-ui, sans-serif;
+  /* Keep native form controls (select popups, scrollbars, autofill) dark
+     even when the visitor's OS is in light mode. */
+  color-scheme: dark;
 }
 
 ::selection {

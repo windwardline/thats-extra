@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ClipboardList, Printer } from "lucide-react";
+import { ClipboardList } from "lucide-react";
+import { PrintButton } from "@/components/print-button";
 import {
   CHANGE_TYPES,
   TRADES,
@@ -58,6 +59,7 @@ export function DemoForm({ initialSample }: { initialSample: boolean }) {
     initialSample ? { ...MIDTOWN_SCENARIO } : EMPTY,
   );
   const [errors, setErrors] = useState<Partial<FormValues>>({});
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<GenerateResponse | null>(null);
   const resultRef = useRef<HTMLDivElement>(null);
@@ -93,18 +95,26 @@ export function DemoForm({ initialSample }: { initialSample: boolean }) {
 
     setLoading(true);
     setResult(null);
+    setSubmitError(null);
     try {
       const res = await fetch("/api/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(parsed.data),
       });
-      if (!res.ok) throw new Error(`Generate failed with status ${res.status}`);
+      if (!res.ok) {
+        // Surface the server's structured error when it sent one.
+        const body = (await res.json().catch(() => null)) as { error?: string } | null;
+        throw new Error(body?.error ?? `The server responded with status ${res.status}.`);
+      }
       setResult((await res.json()) as GenerateResponse);
     } catch (err) {
-      // Network-level failure (the API itself never 500s): surface it honestly.
       console.error("demo: generate request failed:", err);
-      setErrors({ pmEmail: "Something went wrong reaching the server. Try again." });
+      setSubmitError(
+        err instanceof Error && err.message
+          ? err.message
+          : "Something went wrong reaching the server. Try again.",
+      );
     } finally {
       setLoading(false);
     }
@@ -248,6 +258,11 @@ export function DemoForm({ initialSample }: { initialSample: boolean }) {
         >
           {loading ? "Drafting your change request…" : "Generate Change Request"}
         </button>
+        {submitError ? (
+          <p role="alert" className="mt-3 text-sm text-amber">
+            {submitError}
+          </p>
+        ) : null}
       </form>
 
       {loading ? (
@@ -270,14 +285,7 @@ export function DemoForm({ initialSample }: { initialSample: boolean }) {
       {result ? (
         <div ref={resultRef} className="scroll-mt-24">
           <div className="print-hidden mb-4 flex justify-end">
-            <button
-              type="button"
-              onClick={() => window.print()}
-              className="inline-flex items-center gap-2 rounded-md border border-line px-3 py-1.5 text-sm text-fog transition-colors hover:border-fog hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber"
-            >
-              <Printer className="size-4" aria-hidden />
-              Print / Save PDF
-            </button>
+            <PrintButton />
           </div>
           <SampleOutput pkg={result.pkg} source={result.source} />
         </div>

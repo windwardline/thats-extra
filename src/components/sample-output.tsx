@@ -1,9 +1,6 @@
-"use client";
-
-import { useState } from "react";
-import { Check, Copy } from "lucide-react";
 import type { ChangeRequestPackage, GenerateResponse } from "@/lib/schema";
 import { Badge } from "@/components/ui";
+import { CopyButton } from "@/components/copy-button";
 
 const SECTIONS: { key: keyof ChangeRequestPackage; label: string; mono?: boolean }[] = [
   { key: "executiveSummary", label: "Executive Summary" },
@@ -17,28 +14,10 @@ const SECTIONS: { key: keyof ChangeRequestPackage; label: string; mono?: boolean
   { key: "emailDraft", label: "Email Draft to the Project Manager", mono: true },
 ];
 
-function CopyButton({ text, label }: { text: string; label: string }) {
-  const [copied, setCopied] = useState(false);
-
-  async function copy() {
-    await navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1600);
-  }
-
-  return (
-    <button
-      type="button"
-      onClick={copy}
-      aria-label={`Copy ${label}`}
-      className="print-hidden inline-flex items-center gap-1.5 rounded-md border border-line px-2 py-1 font-utility text-[11px] text-fog transition-colors hover:border-fog hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber"
-    >
-      {copied ? <Check className="size-3 text-amber" /> : <Copy className="size-3" />}
-      {copied ? "Copied" : "Copy"}
-    </button>
-  );
-}
-
+/**
+ * Shared component: renders server-side on the landing page and inside the
+ * client demo form. Only CopyButton is a client island.
+ */
 export function SampleOutput({
   pkg,
   source,
