@@ -17,6 +17,9 @@ serialization of the report that can be embedded verbatim inside a JSON string
 - Groq API key (console.groq.com — free tier).
 - Google account (michaellynnpeacock@gmail.com) — Docs/Drive + Sheets connections.
 - Resend account with windwardline.com verified and a **Full access** API key.
+- DNS (Cloudflare, zone windwardline.com): Resend's DKIM + send-subdomain SPF records,
+  plus a DMARC record — `_dmarc` TXT `"v=DMARC1; p=none; rua=mailto:michaellynnpeacock@gmail.com; fo=1"`
+  (added 2026-07-04; without DMARC, iCloud/Gmail route the change-request emails to Spam).
 - Google Sheet **"That's Extra - Change Request Log"** with header row:
   `Date | Company | Project | Trade | Change Type | Urgency | Submitted By | PM Email | Labor Impact | Material Impact | Schedule Impact | Doc Link | Status`
 
@@ -42,7 +45,7 @@ serialization of the report that can be embedded verbatim inside a JSON string
    system prompt mirrors `src/lib/openai.ts` with JSON enforcement in-prompt):
 
    ```
-   {"model": "openai/gpt-oss-120b", "response_format": {"type": "json_object"}, "messages": [{"role": "system", "content": "You are a professional construction change-request writer working on behalf of a specialty-trade subcontractor. Given a field report, draft a complete, professional change request package a real subcontractor would send to a general contractor.\n\nReturn a JSON object with exactly these string keys: title, executiveSummary, existingCondition, requestedChange, laborImpact, materialImpact, scheduleImpact, recommendedNextStep, customerFacingRequest, emailDraft.\n\nRules:\n- Formal, confident, factual tone. No hedging, no apologies.\n- Weave the report's actual company, project, impacts, urgency, and requested next step into every relevant section.\n- customerFacingRequest is a formal multi-paragraph change request suitable to forward to the GC.\n- emailDraft is a ready-to-send email to the project manager, signed by the submitter.\n- Do not invent dollar amounts unless they appear in the report."}, {"role": "user", "content": "{{Report Json}}"}]}
+   {"model": "openai/gpt-oss-120b", "response_format": {"type": "json_object"}, "messages": [{"role": "system", "content": "You are a professional construction change-request writer working on behalf of a specialty-trade subcontractor. Given a field report, draft a complete, professional change request package a real subcontractor would send to a general contractor.\n\nReturn a JSON object with exactly these string keys: title, executiveSummary, existingCondition, requestedChange, laborImpact, materialImpact, scheduleImpact, recommendedNextStep, customerFacingRequest, emailDraft.\n\nRules:\n- Formal, confident, factual tone. No hedging, no apologies.\n- Weave the report's actual company, project, impacts, urgency, and requested next step into every relevant section.\n- customerFacingRequest is a formal multi-paragraph change request suitable to forward to the GC.\n- emailDraft is a ready-to-send email to the project manager, signed by the submitter. It must contain only the email body with no To:, Subject:, or other header lines, and it must start directly with the greeting.\n- Do not invent dollar amounts unless they appear in the report."}, {"role": "user", "content": "{{Report Json}}"}]}
    ```
 
 4. Headers: `Content-Type: application/json` and `Authorization: Bearer <GROQ_API_KEY>`.
@@ -97,6 +100,9 @@ serialization of the report that can be embedded verbatim inside a JSON string
 
 Name the Zap **"That's Extra — Change Request Automation"**, then **Publish** (this
 turns it on). Published **2026-07-03**, version v1, first production run Successful.
+v2 published **2026-07-04** ("emailDraft body only, no Subject/To header lines"):
+tightened the step 3 emailDraft rule so the email body no longer opens with a
+duplicated Subject line; verified with a production run the same day.
 
 ## Production wiring
 
