@@ -22,7 +22,7 @@
 
 > Every commercial subcontractor knows the most expensive words on a jobsite: **"Can you just..."** Can you just move those outlets. Can you just shift this duct. While you're here...
 >
-> My client — Meridian Electric, a commercial electrical sub with about forty field employees — does that extra work every single day. The work gets done. The paperwork doesn't. The foreman's photos die on his phone, the labor hours evaporate by Friday, and the change request becomes an afterthought. Industry-wide, that's three to five percent of contract value — for Meridian, **$72,000 to $120,000 a year in work they did but never billed.**
+> My client — Windward Electric, a commercial electrical sub with about forty field employees — does that extra work every single day. The work gets done. The paperwork doesn't. The foreman's photos die on his phone, the labor hours evaporate by Friday, and the change request becomes an afterthought. Industry-wide, that's three to five percent of contract value — for Windward, **$72,000 to $120,000 a year in work they did but never billed.**
 >
 > I built them an automation that fixes it. It's called **That's Extra.**
 
@@ -36,7 +36,7 @@
 
 ### [1:30 — Tab 2, scroll as you talk] — The Automation (45 sec)
 
-> Under the hood it's one Zapier workflow, six steps, and I can walk it end to end in thirty seconds. A form submission from the field **triggers** the Zap. A **formatter** cleans the inputs. **OpenAI-compatible AI** drafts the full change request package. It merges into a **branded Google Doc and PDF**, **emails the project manager**, and **stores the record** — so at the end of the quarter, Meridian can see every extra across every job. The amber chips you see are where the client's credentials plug in on day one — and this isn't a diagram of a hypothetical: the Zap you're looking at is live, and you'll see it fire in a minute.
+> Under the hood it's one Zapier workflow, six steps, and I can walk it end to end in thirty seconds. A form submission from the field **triggers** the Zap. A **formatter** cleans the inputs. **OpenAI-compatible AI** drafts the full change request package. It merges into a **branded Google Doc and PDF**, **emails the project manager**, and **stores the record** — so at the end of the quarter, Windward can see every extra across every job. The amber chips you see are where the client's credentials plug in on day one — and this isn't a diagram of a hypothetical: the Zap you're looking at is live, and you'll see it fire in a minute.
 
 ### [2:15 — Tab 3] — The Live Demo (75 sec — this is the money shot)
 
@@ -53,11 +53,11 @@
 
 ### [3:45 — Tab 4, scroll; click Contract in the nav halfway through] — The Written Deliverables (45 sec)
 
-> Selling this to a client takes paper, so both deliverables are built in. The **proposal**: the business problem quantified against Meridian's actual volume, the solution, deliverables, a two-week timeline, and pricing — $4,800 implementation plus $349 a month, with a 30-day guarantee. *(Click **Contract** in the nav.)* And the **services agreement**: scope, payment terms, IP, confidentiality, and a plain-English warranty clause — the AI writes a strong first draft; a human reviews it before it goes to a customer. Both are print-ready — *(hover the Print/Save PDF button)* — one click and it's a client-ready PDF.
+> Selling this to a client takes paper, so both deliverables are built in. The **proposal**: the business problem quantified against Windward's actual volume, the solution, deliverables, a two-week timeline, and pricing — $4,800 implementation plus $349 a month, with a 30-day guarantee. *(Click **Contract** in the nav.)* And the **services agreement**: scope, payment terms, IP, confidentiality, and a plain-English warranty clause — the AI writes a strong first draft; a human reviews it before it goes to a customer. Both are print-ready — *(hover the Print/Save PDF button)* — one click and it's a client-ready PDF.
 
 ### [4:30 — Face the room] — Close (30 sec)
 
-> So: a real problem — extra work becoming free work. A landing page that sells it, an automation that solves it in ninety seconds, and the proposal and contract to close the deal. Meridian recovers even half of what they're losing, this pays for itself **fifty times over in year one**.
+> So: a real problem — extra work becoming free work. A landing page that sells it, an automation that solves it in ninety seconds, and the proposal and contract to close the deal. Windward recovers even half of what they're losing, this pays for itself **fifty times over in year one**.
 >
 > That's Extra. Because every "can you just..." has a price. Thank you.
 
@@ -67,7 +67,7 @@
 
 | Requirement | Where you showed it |
 |---|---|
-| Pitch: automation solution to a problem | 0:00 open — hypothetical client Meridian Electric, quantified problem |
+| Pitch: automation solution to a problem | 0:00 open — hypothetical client Windward Electric, quantified problem |
 | Landing page: positioning, headline, value prop, CTA, visual aid | 0:45 — headline + value prop verbatim, CTAs on screen, workflow diagram as the visual |
 | Demo the automation (workflow + deployed link) | 1:30 workflow page + 2:15 live generation on the deployed site |
 | Written: proposal template | 3:45 — /proposal |

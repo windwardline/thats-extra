@@ -142,7 +142,7 @@ export function DemoForm({ initialSample }: { initialSample: boolean }) {
               className={inputClass}
               value={values.companyName}
               onChange={(e) => set("companyName", e.target.value)}
-              placeholder="Meridian Electric Co."
+              placeholder="Windward Electric Co."
             />
           </Field>
           <Field label="Project Name" error={errors.projectName}>
