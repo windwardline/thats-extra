@@ -5,7 +5,7 @@ import type { FieldReport } from "@/lib/schema";
  * page, the demo form prefill, and the test suite. Purely illustrative.
  */
 export const MIDTOWN_SCENARIO: FieldReport = {
-  companyName: "Meridian Electric Co.",
+  companyName: "Windward Electric Co.",
   projectName: "Midtown Office Renovation",
   submittedBy: "Dave Kowalski, Foreman",
   trade: "Electrical",
@@ -21,5 +21,5 @@ export const MIDTOWN_SCENARIO: FieldReport = {
   urgency: "High",
   requestedNextStep:
     "Issue change order for the fixture relocation before ceiling close-in proceeds.",
-  pmEmail: "pm@meridianelectric.example",
+  pmEmail: "pm@windwardline.com",
 };
