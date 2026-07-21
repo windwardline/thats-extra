@@ -1,6 +1,6 @@
 import { fieldReportSchema, type GenerateResponse } from "@/lib/schema";
 import { generateSamplePackage } from "@/lib/generator";
-import { generateWithOpenAI } from "@/lib/openai";
+import { generateWithGroq } from "@/lib/groq";
 import { forwardToZapier } from "@/lib/zapier";
 
 export type GenerateResult = {
@@ -10,14 +10,14 @@ export type GenerateResult = {
 
 /**
  * Framework-free request handler for /api/generate. Validates the body,
- * tries OpenAI when a key is configured, and falls back to the
+ * tries Groq when a key is configured, and falls back to the
  * deterministic sample generator on any failure — the demo never 500s.
  * Successful generations are also forwarded to the live Zapier automation
  * (a no-op unless ZAPIER_WEBHOOK_URL is configured).
  */
 export async function handleGenerate(
   body: unknown,
-  deps: { generate?: typeof generateWithOpenAI; forward?: typeof forwardToZapier } = {},
+  deps: { generate?: typeof generateWithGroq; forward?: typeof forwardToZapier } = {},
 ): Promise<GenerateResult> {
   const parsed = fieldReportSchema.safeParse(body);
   if (!parsed.success) {
@@ -30,13 +30,13 @@ export async function handleGenerate(
   }
 
   const report = parsed.data;
-  const generate = deps.generate ?? generateWithOpenAI;
+  const generate = deps.generate ?? generateWithGroq;
   const forward = deps.forward ?? forwardToZapier;
 
-  if (process.env.OPENAI_API_KEY) {
+  if (process.env.GROQ_API_KEY) {
     try {
       const pkg = await generate(report);
-      return { status: 200, json: { source: "openai", pkg, zapier: await forward(report) } };
+      return { status: 200, json: { source: "groq", pkg, zapier: await forward(report) } };
     } catch (err) {
       console.warn("generate: falling back to sample:", err);
     }

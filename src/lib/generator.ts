@@ -3,7 +3,7 @@ import type { ChangeRequestPackage, FieldReport } from "@/lib/schema";
 /**
  * Deterministic fallback generator. Produces a realistic change request
  * package from the actual field report — no network, no randomness, no
- * clock reads — so the demo works with no OPENAI_API_KEY and survives any
+ * clock reads — so the demo works with no GROQ_API_KEY and survives any
  * API failure. Same inputs always yield the same package.
  */
 
