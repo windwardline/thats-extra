@@ -4,7 +4,7 @@
 
 That's Extra is an AI-powered margin recovery platform for commercial electrical and HVAC
 subcontractors. Field crews capture extra-work evidence in a two-minute report; a Zapier +
-OpenAI automation turns it into a professional change request emailed to the PM and stored
+Groq automation turns it into a professional change request emailed to the PM and stored
 for reporting — before extra work becomes free work. This repo is the presentation-ready
 SaaS web app: landing page, live demo, automation documentation, and the written
 deliverables (proposal + contract templates).
@@ -27,7 +27,7 @@ Form (zod-validated) → POST /api/generate
                           ├─ invalid body ──────────────→ 400
                           ├─ GROQ_API_KEY set?
                           │    ├─ yes → Groq (15s timeout, JSON schema-validated)
-                          │    │          ├─ ok ────────→ 200 { source: "openai", pkg }
+                          │    │          ├─ ok ────────→ 200 { source: "groq", pkg }
                           │    │          └─ any error ─→ falls through ↓
                           │    └─ no ─────────────────────↓
                           └─ deterministic generator ───→ 200 { source: "sample", pkg }
