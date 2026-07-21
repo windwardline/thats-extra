@@ -403,7 +403,7 @@ zapier.com's editor. Every value you must type or pick is spelled out; anything 
 
 - Zapier account with multi-step Zaps + premium apps active (trial or paid).
 - OpenAI API key with credit (platform.openai.com → API keys).
-- Google account (michaellynnpeacock@gmail.com) — used ONLY for Docs/Drive/Sheets.
+- Google account (support@windwardline.com) — used ONLY for Docs/Drive/Sheets.
 - Resend account with the windwardline.com domain verified and an API key.
 
 ## Step 1 — Trigger: Webhooks by Zapier, "Catch Hook"
@@ -476,7 +476,7 @@ zapier.com's editor. Every value you must type or pick is spelled out; anything 
 
 ## Step 4 — Google Docs, "Create Document from Template"
 
-1. First, in Google Docs (michaellynnpeacock@gmail.com), create a template named
+1. First, in Google Docs (support@windwardline.com), create a template named
    **"That's Extra — Change Request Template"** with this body (placeholders in
    double braces are Google Docs merge fields):
 
