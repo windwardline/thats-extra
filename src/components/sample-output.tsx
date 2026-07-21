@@ -34,10 +34,10 @@ export function SampleOutput({
           </p>
           <h3 className="mt-2 font-display text-lg font-semibold text-white">{pkg.title}</h3>
         </div>
-        {source === "openai" ? (
+        {source === "groq" ? (
           <Badge tone="amber">Live AI</Badge>
         ) : (
-          <Badge title="Set OPENAI_API_KEY to generate live.">Sample Mode</Badge>
+          <Badge title="Set GROQ_API_KEY to generate live.">Sample Mode</Badge>
         )}
       </div>
       <dl className="divide-y divide-line">

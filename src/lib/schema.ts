@@ -49,7 +49,7 @@ export type ChangeRequestPackage = z.infer<typeof changeRequestPackageSchema>;
 export type ZapierStatus = "sent" | "skipped" | "failed";
 
 export type GenerateResponse = {
-  source: "openai" | "sample";
+  source: "groq" | "sample";
   pkg: ChangeRequestPackage;
   zapier: ZapierStatus;
 };

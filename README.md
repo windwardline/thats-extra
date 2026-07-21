@@ -18,15 +18,15 @@ deliverables (proposal + contract templates).
 | `/workflow` | The Zapier automation explained step by step, with credential placeholders |
 | `/proposal` | Consulting proposal template (screen + print-to-PDF) |
 | `/contract` | Professional services agreement template (screen + print-to-PDF) |
-| `POST /api/generate` | Change request generation — OpenAI with deterministic fallback |
+| `POST /api/generate` | Change request generation — Groq with deterministic fallback |
 
 **Generation flow:**
 
 ```
 Form (zod-validated) → POST /api/generate
                           ├─ invalid body ──────────────→ 400
-                          ├─ OPENAI_API_KEY set?
-                          │    ├─ yes → OpenAI (15s timeout, JSON schema-validated)
+                          ├─ GROQ_API_KEY set?
+                          │    ├─ yes → Groq (15s timeout, JSON schema-validated)
                           │    │          ├─ ok ────────→ 200 { source: "openai", pkg }
                           │    │          └─ any error ─→ falls through ↓
                           │    └─ no ─────────────────────↓
@@ -47,7 +47,7 @@ cp .env.example .env.local   # optional — the app runs fully without it
 npm run dev                  # http://localhost:3000
 ```
 
-Set `OPENAI_API_KEY` in `.env.local` to enable live AI generation. Without it, the demo
+Set `GROQ_API_KEY` in `.env.local` to enable live AI generation. Without it, the demo
 runs in Sample Mode.
 
 ## Testing
@@ -68,7 +68,7 @@ are verified by typecheck + lint + build + browser checks.
 
 **Option A — GitHub import (recommended):** push this repo to GitHub, then in the Vercel
 dashboard: *Add New → Project → Import* the repo. Next.js is auto-detected. Optionally add
-`OPENAI_API_KEY` under *Settings → Environment Variables*. Deploy.
+`GROQ_API_KEY` under *Settings → Environment Variables*. Deploy.
 
 **Option B — CLI:**
 

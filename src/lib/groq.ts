@@ -21,29 +21,33 @@ Rules:
 - emailDraft is a ready-to-send email to the project manager, signed by the submitter.
 - Do not invent dollar amounts unless they appear in the report.`;
 
+// Groq is the provider. It speaks the OpenAI wire protocol, so the official
+// `openai` SDK is still the right client — only the base URL changes.
+const GROQ_BASE_URL = "https://api.groq.com/openai/v1";
+const DEFAULT_MODEL = "llama-3.3-70b-versatile";
+
 /**
- * Calls an OpenAI-compatible API to draft the change request package.
- * Defaults to OpenAI itself; set OPENAI_BASE_URL + OPENAI_MODEL to use a
- * compatible provider (e.g. Groq: https://api.groq.com/openai/v1 with
- * model openai/gpt-oss-120b). Throws when no OPENAI_API_KEY is configured
- * or on any API/validation failure — the caller (generate-handler) owns
- * the fallback decision.
+ * Drafts the change request package via Groq's OpenAI-compatible API.
+ *
+ * Throws when no GROQ_API_KEY is configured or on any API/validation
+ * failure — the caller (generate-handler) owns the fallback decision and
+ * drops to the deterministic generator.
  */
-export async function generateWithOpenAI(report: FieldReport): Promise<ChangeRequestPackage> {
-  const apiKey = process.env.OPENAI_API_KEY;
-  if (!apiKey) throw new Error("OPENAI_API_KEY is not set");
+export async function generateWithGroq(report: FieldReport): Promise<ChangeRequestPackage> {
+  const apiKey = process.env.GROQ_API_KEY;
+  if (!apiKey) throw new Error("GROQ_API_KEY is not set");
 
   // maxRetries: 0 — the caller falls back to the deterministic generator on
   // failure; SDK retries would stack 15s timeouts and can outlive a
   // serverless function's duration limit before the fallback ever runs.
   const client = new OpenAI({
     apiKey,
-    baseURL: process.env.OPENAI_BASE_URL || undefined,
+    baseURL: process.env.GROQ_BASE_URL || GROQ_BASE_URL,
     timeout: 15_000,
     maxRetries: 0,
   });
   const completion = await client.chat.completions.create({
-    model: process.env.OPENAI_MODEL || "gpt-4o-mini",
+    model: process.env.GROQ_MODEL || DEFAULT_MODEL,
     response_format: { type: "json_object" },
     messages: [
       { role: "system", content: SYSTEM_PROMPT },
@@ -52,7 +56,7 @@ export async function generateWithOpenAI(report: FieldReport): Promise<ChangeReq
   });
 
   const content = completion.choices[0]?.message?.content;
-  if (!content) throw new Error("OpenAI returned an empty completion");
+  if (!content) throw new Error("Groq returned an empty completion");
 
   return changeRequestPackageSchema.parse(JSON.parse(content));
 }
