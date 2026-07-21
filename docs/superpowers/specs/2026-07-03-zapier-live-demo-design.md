@@ -19,7 +19,7 @@ placeholder chips.
 | Live scope | All six steps run for real |
 | Zapier plan | Free account with trial capabilities active through demo day (~5 days) |
 | AI step | Zapier's native OpenAI app (gpt-4o-mini) with Michael's OpenAI key |
-| Doc/PDF step | Google Docs template merge via personal Gmail (michaellynnpeacock@gmail.com), used only for Docs/Drive |
+| Doc/PDF step | Google Docs template merge via personal Gmail (support@windwardline.com), used only for Docs/Drive |
 | Email step | Resend, sending from a windwardline.com address |
 | Storage step | Google Sheets |
 | Trigger path | Server-side forward from `/api/generate` to `ZAPIER_WEBHOOK_URL` (Vercel env var) |

@@ -15,10 +15,10 @@ serialization of the report that can be embedded verbatim inside a JSON string
 
 - Zapier account with multi-step Zaps + premium apps (trial active through **Jul 8, 2026**).
 - Groq API key (console.groq.com — free tier).
-- Google account (michaellynnpeacock@gmail.com) — Docs/Drive + Sheets connections.
+- Google account (support@windwardline.com) — Docs/Drive + Sheets connections.
 - Resend account with windwardline.com verified and a **Full access** API key.
 - DNS (Cloudflare, zone windwardline.com): Resend's DKIM + send-subdomain SPF records,
-  plus a DMARC record — `_dmarc` TXT `"v=DMARC1; p=none; rua=mailto:michaellynnpeacock@gmail.com; fo=1"`
+  plus a DMARC record — `_dmarc` TXT `"v=DMARC1; p=none; rua=mailto:support@windwardline.com; fo=1"`
   (added 2026-07-04; without DMARC, iCloud/Gmail route the change-request emails to Spam).
 - Google Sheet **"That's Extra - Change Request Log"** with header row:
   `Date | Company | Project | Trade | Change Type | Urgency | Submitted By | PM Email | Labor Impact | Material Impact | Schedule Impact | Doc Link | Status`
@@ -64,7 +64,7 @@ serialization of the report that can be embedded verbatim inside a JSON string
 ## Step 5 — Google Docs, "Create Document From Text"
 
 1. App: **Google Docs** → Event: **Create Document From Text**.
-   Account: michaellynnpeacock@gmail.com.
+   Account: support@windwardline.com.
 2. Document Name: `Change Request — {{Project Name}}` (from step 1).
 3. Document Content (limited HTML):
    `<h1>{{Output Title}}</h1>` newline `{{Output Customer Facing Request}}` newline
@@ -89,7 +89,7 @@ serialization of the report that can be embedded verbatim inside a JSON string
 ## Step 7 — Google Sheets, "Create Spreadsheet Row"
 
 1. App: **Google Sheets** → Event: **Create Spreadsheet Row**.
-   Account: michaellynnpeacock@gmail.com.
+   Account: support@windwardline.com.
 2. Spreadsheet: **That's Extra - Change Request Log**. Worksheet: **Sheet1**.
 3. Column mapping: Date = system variable **Current time: UTC (ISO)**;
    Company/Project/Trade/Change Type/Urgency/Submitted By/PM Email/Labor Impact/
