@@ -1,5 +1,7 @@
 # That's Extra
 
+Live: **[thats-extra.windwardline.com](https://thats-extra.windwardline.com)**
+
 **Every "Can You Just..." Has a Price.**
 
 That's Extra is an AI-powered margin recovery platform for commercial electrical and HVAC
@@ -66,16 +68,9 @@ are verified by typecheck + lint + build + browser checks.
 
 ## Deployment (Vercel)
 
-**Option A — GitHub import (recommended):** push this repo to GitHub, then in the Vercel
-dashboard: *Add New → Project → Import* the repo. Next.js is auto-detected. Optionally add
-`GROQ_API_KEY` under *Settings → Environment Variables*. Deploy.
-
-**Option B — CLI:**
-
-```bash
-npx vercel login
-npx vercel --prod
-```
+Live at [thats-extra.windwardline.com](https://thats-extra.windwardline.com). The repo is
+connected to Vercel; pushes to `main` deploy to production automatically. `GROQ_API_KEY`
+is set in the Vercel project's environment variables.
 
 No other configuration is required — there is no database and no server state.
 
