@@ -25,7 +25,7 @@ export function WorkflowDiagram({
               <span
                 aria-hidden
                 className={`mt-1 size-2.5 shrink-0 rotate-45 lg:mt-0 ${
-                  step.accent ? "bg-amber" : "border border-fog bg-surface"
+                  step.accent ? "bg-amber-fill" : "border border-fog bg-surface"
                 }`}
               />
               {i < steps.length - 1 ? (
@@ -61,7 +61,7 @@ export function WorkflowDiagram({
             <span
               aria-hidden
               className={`mt-1 size-2.5 shrink-0 rotate-45 ${
-                step.accent ? "bg-amber" : "border border-fog bg-surface"
+                step.accent ? "bg-amber-fill" : "border border-fog bg-surface"
               }`}
             />
             {i < steps.length - 1 ? (

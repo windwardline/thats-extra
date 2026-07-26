@@ -24,6 +24,14 @@ export default function RootLayout({
       lang="en"
       className={`${sora.variable} ${inter.variable} ${jetbrains.variable} h-full antialiased`}
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){try{var t=localStorage.getItem('te-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}})()",
+          }}
+        />
+      </head>
       <body className="min-h-full flex flex-col">
         <SiteHeader />
         <main className="flex-1">{children}</main>

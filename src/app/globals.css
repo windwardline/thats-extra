@@ -6,6 +6,9 @@
   --color-line: #232a35;
   --color-amber: #f5a524;
   --color-amber-deep: #c47f0e;
+  --color-amber-fill: #f5a524;
+  --color-amber-fill-hover: #c47f0e;
+  --color-on-amber: #0b0e13;
   --color-paper: #f7f5f0;
   --color-fog: #9aa5b4;
   --color-bright: #e8ecf2;
@@ -19,9 +22,36 @@ body {
   background: var(--color-ink);
   color: var(--color-bright);
   font-family: var(--font-body), system-ui, sans-serif;
-  /* Keep native form controls (select popups, scrollbars, autofill) dark
-     even when the visitor's OS is in light mode. */
+}
+
+/* Night is the default; day is billed separately. A stored choice
+   (data-theme) outranks the OS; no attribute follows it. */
+:root {
   color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme='dark']) {
+    color-scheme: light;
+    --color-ink: #f6f4ef;
+    --color-surface: #ffffff;
+    --color-line: #dcd7cb;
+    --color-fog: #5b6472;
+    --color-bright: #191e28;
+    --color-amber: #a96a06;
+    --color-amber-deep: #8a5807;
+    --color-paper: #12161d;
+  }
+}
+:root[data-theme='light'] {
+  color-scheme: light;
+  --color-ink: #f6f4ef;
+  --color-surface: #ffffff;
+  --color-line: #dcd7cb;
+  --color-fog: #5b6472;
+  --color-bright: #191e28;
+  --color-amber: #a96a06;
+  --color-amber-deep: #8a5807;
+  --color-paper: #12161d;
 }
 
 ::selection {
@@ -70,3 +100,17 @@ body {
     border-color: #cccccc !important;
   }
 }
+
+/* the lamp — Day rate / Night rate / Prevailing */
+.lamp { display: flex; align-items: center; gap: 1px; margin-left: 8px; }
+.lamp-opt {
+  font-family: var(--font-utility), monospace;
+  font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+  background: none; border: 0; cursor: pointer;
+  color: var(--color-fog); padding: 6px 6px; border-radius: 6px;
+  white-space: nowrap;
+}
+.lamp-opt:hover { color: var(--color-bright); }
+.lamp-opt:focus-visible { outline: 2px solid var(--color-amber); outline-offset: 2px; }
+.lamp-opt[aria-pressed='true'] { color: var(--color-amber); }
+@media (max-width: 640px) { .lamp-opt { padding: 6px 4px; letter-spacing: 0.06em; } }
