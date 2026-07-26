@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Container } from "@/components/ui";
 import { NAV } from "@/lib/nav";
+import { ThemeLamp } from "@/components/theme-lamp";
 
 export function SiteHeader() {
   return (
@@ -8,7 +9,7 @@ export function SiteHeader() {
       <Container className="flex h-16 items-center justify-between">
         <Link
           href="/"
-          className="whitespace-nowrap font-display text-base font-bold tracking-tight text-white sm:text-lg"
+          className="whitespace-nowrap font-display text-base font-bold tracking-tight text-bright sm:text-lg"
         >
           THAT&apos;S EXTRA<span className="text-amber">.</span>
         </Link>
@@ -17,12 +18,13 @@ export function SiteHeader() {
             <Link
               key={item.href}
               href={item.href}
-              className="whitespace-nowrap rounded-md px-2 py-1.5 text-[13px] text-fog transition-colors hover:bg-surface hover:text-white sm:px-3 sm:text-sm"
+              className="whitespace-nowrap rounded-md px-2 py-1.5 text-[13px] text-fog transition-colors hover:bg-surface hover:text-bright sm:px-3 sm:text-sm"
             >
               {item.label}
             </Link>
           ))}
         </nav>
+        <ThemeLamp />
       </Container>
     </header>
   );
