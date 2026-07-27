@@ -6,9 +6,9 @@ type Choice = "light" | "dark" | "system";
 const KEY = "te-theme";
 
 const OPTIONS: Array<{ choice: Choice; label: string }> = [
-  { choice: "light", label: "Day rate" },
-  { choice: "dark", label: "Night rate" },
-  { choice: "system", label: "Prevailing" },
+  { choice: "light", label: "Light" },
+  { choice: "dark", label: "Dark" },
+  { choice: "system", label: "System" },
 ];
 
 function read(): Choice {
