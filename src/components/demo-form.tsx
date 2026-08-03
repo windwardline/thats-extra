@@ -125,7 +125,7 @@ export function DemoForm({ initialSample }: { initialSample: boolean }) {
     <div className="space-y-10">
       <form onSubmit={submit} noValidate className="print-hidden">
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <h2 className="font-display text-lg font-semibold text-white">Field Report</h2>
+          <h2 className="font-display text-lg font-semibold text-bright">Field Report</h2>
           <button
             type="button"
             onClick={loadSample}

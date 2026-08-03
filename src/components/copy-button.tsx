@@ -48,7 +48,7 @@ export function CopyButton({ text, label }: { text: string; label: string }) {
       type="button"
       onClick={copy}
       aria-label={`Copy ${label}`}
-      className="print-hidden inline-flex items-center gap-1.5 rounded-md border border-line px-2 py-1 font-utility text-[11px] text-fog transition-colors hover:border-fog hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber"
+      className="print-hidden inline-flex items-center gap-1.5 rounded-md border border-line px-2 py-1 font-utility text-[11px] text-fog transition-colors hover:border-fog hover:text-bright focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber"
     >
       {state === "copied" ? (
         <Check className="size-3 text-amber" />

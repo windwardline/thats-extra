@@ -18,7 +18,7 @@ export function Container({
 export const buttonBase =
   "inline-flex items-center justify-center gap-2 rounded-md transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber";
 export const buttonPrimary = `${buttonBase} bg-amber-fill text-on-amber hover:bg-amber-fill-hover shadow-[0_0_24px_rgba(245,165,36,0.25)]`;
-export const buttonGhost = `${buttonBase} border border-line text-fog hover:border-fog hover:text-white`;
+export const buttonGhost = `${buttonBase} border border-line text-fog hover:border-fog hover:text-bright`;
 
 export function Button({
   href,
@@ -88,7 +88,7 @@ export function SectionHeading({
       {eyebrow ? (
         <p className="font-utility text-xs uppercase tracking-[0.2em] text-amber">{eyebrow}</p>
       ) : null}
-      <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+      <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-bright sm:text-4xl">
         {title}
       </h2>
       {lede ? <p className="mt-4 text-lg leading-relaxed text-fog">{lede}</p> : null}

@@ -7,7 +7,7 @@ export function SiteFooter() {
     <footer className="print-hidden border-t border-line bg-surface">
       <Container className="flex flex-col gap-6 py-10 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <p className="font-display text-base font-bold text-white">
+          <p className="font-display text-base font-bold text-bright">
             THAT&apos;S EXTRA<span className="text-amber">.</span>
           </p>
           <p className="mt-1 text-sm text-fog">
@@ -19,7 +19,7 @@ export function SiteFooter() {
             <Link
               key={item.href}
               href={item.href}
-              className="text-sm text-fog transition-colors hover:text-white"
+              className="text-sm text-fog transition-colors hover:text-bright"
             >
               {item.label}
             </Link>

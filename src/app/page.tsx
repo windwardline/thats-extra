@@ -122,7 +122,7 @@ export default function Home() {
             <p className="font-utility text-xs uppercase tracking-[0.2em] text-amber">
               Margin Recovery for Specialty Trades
             </p>
-            <h1 className="mt-4 font-display text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-6xl">
+            <h1 className="mt-4 font-display text-4xl font-semibold tracking-tight text-bright sm:text-5xl lg:text-6xl">
               Every &ldquo;Can You Just...&rdquo; Should Come With a Change Order.
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-fog">
@@ -174,7 +174,7 @@ export default function Home() {
                 </li>
               ))}
             </ol>
-            <p className="mt-10 max-w-2xl border-l-2 border-amber pl-5 text-lg font-medium leading-relaxed text-white">
+            <p className="mt-10 max-w-2xl border-l-2 border-amber pl-5 text-lg font-medium leading-relaxed text-bright">
               You did the work. You bought the material. You even stayed late. The only thing
               you didn&apos;t do was get paid.
             </p>
@@ -273,7 +273,7 @@ export default function Home() {
               <Reveal key={benefit.title}>
                 <Card className="h-full">
                   <benefit.icon className="size-5 text-amber" aria-hidden />
-                  <h3 className="mt-4 font-display text-base font-semibold text-white">
+                  <h3 className="mt-4 font-display text-base font-semibold text-bright">
                     {benefit.title}
                   </h3>
                   <p className="mt-2 text-sm leading-relaxed text-fog">{benefit.copy}</p>
@@ -288,7 +288,7 @@ export default function Home() {
       <section>
         <Container className="py-20 text-center lg:py-28">
           <Reveal>
-            <h2 className="mx-auto max-w-2xl font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+            <h2 className="mx-auto max-w-2xl font-display text-3xl font-semibold tracking-tight text-bright sm:text-4xl">
               The next &ldquo;can you just...&rdquo; is coming. Be ready for it.
             </h2>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
