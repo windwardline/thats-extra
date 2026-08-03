@@ -32,7 +32,7 @@ export function SampleOutput({
           <p className="font-utility text-xs uppercase tracking-[0.2em] text-fog">
             Change Request Package
           </p>
-          <h3 className="mt-2 font-display text-lg font-semibold text-white">{pkg.title}</h3>
+          <h3 className="mt-2 font-display text-lg font-semibold text-bright">{pkg.title}</h3>
         </div>
         {source === "groq" ? (
           <Badge tone="amber">Live AI</Badge>

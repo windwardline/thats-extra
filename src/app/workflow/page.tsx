@@ -111,7 +111,7 @@ export default function WorkflowPage() {
                         <p className="font-utility text-xs uppercase tracking-wider text-fog">
                           {step.app}
                         </p>
-                        <h2 className="mt-1 font-display text-lg font-semibold text-white">
+                        <h2 className="mt-1 font-display text-lg font-semibold text-bright">
                           {step.title}
                         </h2>
                       </div>
