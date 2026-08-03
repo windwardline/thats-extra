@@ -2,6 +2,8 @@
 
 Live: **[thats-extra.windwardline.com](https://thats-extra.windwardline.com)**
 
+![That's Extra's hero in its dark-first theme: Every "Can You Just…" Should Come With a Change Order — beside the how-the-money-gets-home rail](docs/readme-hero.png)
+
 **Every "Can You Just..." Has a Price.**
 
 That's Extra is an AI-powered margin recovery platform for commercial electrical and HVAC
@@ -74,7 +76,7 @@ is set in the Vercel project's environment variables.
 
 No other configuration is required — there is no database and no server state.
 
-## Presentation notes (Monday run-of-show)
+## Presentation notes (demo run-of-show)
 
 1. **Open `/` (~2 min).** Narrate the problem, not the product: read the "can you just"
    quotes, walk the cost chain, land on the kicker. Scroll through the workflow strip —
