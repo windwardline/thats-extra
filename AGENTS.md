@@ -12,7 +12,7 @@ Next.js ^16.2.12 + React 19.2.8, Tailwind v4, zod, the openai SDK pointed at Gro
 
 ## Gates — CI in order
 
-`npm ci` → lint → typecheck → test → build. Push to main deploys production.
+`npm ci` → lint → typecheck → test → build. Push to main deploys production. A parallel `security.yml` (PRs, pushes, weekly cron) gates Semgrep, secret scan, and dependency scan; a post-deploy job asserts the production security headers.
 
 ## Laws
 
