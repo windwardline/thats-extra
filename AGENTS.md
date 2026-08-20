@@ -1,6 +1,6 @@
 # That's Extra — operating contract
 
-Operating contract for AI work in this repo; the global `~/AGENTS.md` still applies. That's Extra is a change-order capture and margin-recovery demo for electrical and HVAC subcontractors — landing, live demo, workflow, proposal and contract templates. Live at thats-extra.windwardline.com.
+Operating contract for AI work in this repo; the global `~/AGENTS.md` still applies. Work here follows the CONVERGE cycle and delivery discipline in `FLEET.md` (windwardline/windwardline) — find → refute → verify yourself → fix → re-rank → test → update → report, and the delivery rules under it. That's Extra is a change-order capture and margin-recovery demo for electrical and HVAC subcontractors — landing, live demo, workflow, proposal and contract templates. Live at thats-extra.windwardline.com.
 
 ## Stack — do not substitute without flagging
 
