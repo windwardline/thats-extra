@@ -28,3 +28,19 @@ Dependabot groups npm production dependencies as `production-dependencies`, npm 
 - Vitest collects only `src/**/*.test.ts` in a node environment — a `.tsx` component test is silently ignored. Extend `vitest.config.ts` before writing one.
 - Security headers are platform-applied from `vercel.json` — the house seven-header set, CSP on craft's Next.js shape. The demo form is JS-handled (`onSubmit` + fetch to `/api/generate` under `connect-src 'self'`), so `form-action 'none'` holds; `src/lib/security-headers.test.ts` enforces the set. After a deploy, verify live: `curl -sI https://thats-extra.windwardline.com`.
 - Zapier/Resend/DMARC runbook: `docs/zapier/zap-setup.md`. Demo walkthrough: `docs/demo-script.md`.
+
+## Declared gates
+
+The machine-readable gate set. `scripts/fleet-conformance.sh` requires this block
+and the workspace done-gate hook runs every `gate:` line before a session may
+finish, so what runs is what is written here rather than what a hook guessed from
+`package.json`. Each key states its own boundary: `gate:` runs at session end and
+must be local and quick; `release:` runs before a pull request and may be slow;
+`cadence:` is scheduled or needs the live machine and is run by neither.
+
+```fleet-gates
+gate: npm run lint
+gate: npm run typecheck
+gate: npm test
+gate: npm run build
+```
