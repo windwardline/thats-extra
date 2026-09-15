@@ -16,7 +16,7 @@ serialization of the report that can be embedded verbatim inside a JSON string
 - Zapier account with multi-step Zaps + premium apps (trial active through **Jul 8, 2026**).
 - Groq API key (console.groq.com — free tier).
 - Google account (support@windwardline.com) — Docs/Drive + Sheets connections.
-- Resend account with windwardline.com verified and a **Full access** API key.
+- Resend account with `windwardline.com` verified and the **sending-only** key `resend-zapier-sending`.
 - DNS (Cloudflare, zone windwardline.com): Resend's DKIM + send-subdomain SPF records,
   plus a DMARC record — `_dmarc` TXT `"v=DMARC1; p=none; rua=mailto:support@windwardline.com; fo=1"`
   (added 2026-07-04; without DMARC, iCloud/Gmail route the change-request emails to Spam).
@@ -74,9 +74,20 @@ serialization of the report that can be embedded verbatim inside a JSON string
 
 ## Step 6 — Resend, "Send Email"
 
-1. App: **Resend** → Event: **Send Email**. Connect with a **Full access** API key
-   (sending-scoped keys 401 on Zapier's post-send read call — the email still sends
-   but the Zap run fails and halts the remaining steps).
+1. App: **Resend** → Event: **Send Email**. Connect with the **sending-only** key
+   `resend-zapier-sending` (Keychain; `ops/credentials.tsv`). Never a full-access key
+   — anything pasted into Zapier is held by Zapier, and the fleet rule is that a key
+   leaving this machine is `sending_access` scoped to one domain (`FLEET.md`, Email).
+
+   **Corrected 2026-09-15.** This step previously required a Full access key,
+   on the observation that sending-scoped keys 401 on Zapier's post-send read
+   call and halt the remaining steps. That is no longer true and the step was
+   re-tested end to end: the live connection runs on a sending-only key
+   (verified restricted — `/domains` and `/emails/metrics` both answer
+   `401 restricted_api_key`), and a full Zapier "Send Email" action completed
+   and returned a message id with no error. The note had stood since
+   2026-08-17 while the manifest recorded the opposite, and following it would
+   have put a full-access Resend key into a third party's credential store.
 2. From: `That's Extra <changerequests@windwardline.com>`.
 3. To: `{{Pm Email}}` (step 1).
 4. Subject: `Change Request — {{Project Name}} ({{Urgency}} urgency)`.
@@ -131,5 +142,5 @@ vercel --prod --scope windwardline
   unaffected) but the inbox beat dies.
 - **Content parity:** the on-screen package and the emailed draft are two independent
   Groq generations from the same fields — wording differs slightly. Expected.
-- **Resend key scope:** must be Full access (see step 6).
+- **Resend key scope:** sending-only, scoped to `windwardline.com`. Never full access (see step 6).
 - **Attachment URLs:** Resend cannot fetch auth-protected URLs (see step 6).
