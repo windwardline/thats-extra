@@ -4,7 +4,7 @@ Operating contract for AI work in this repo; the global `~/AGENTS.md` still appl
 
 ## Stack — do not substitute without flagging
 
-Next.js ^16.2.12 + React 19.2.8, Tailwind v4, zod, the openai SDK pointed at Groq. Vitest. Security `overrides` pinned in `package.json`.
+Next.js ^16.3.8 + React 19.3.0, Tailwind v4, zod, the openai SDK pointed at Groq. Vitest. Security `overrides` in `package.json`; unfixable advisories accepted with an expiry in `osv-scanner.toml`.
 
 ## Commands
 
